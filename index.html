@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Endangered Animals at the STL Zoo</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  </head>
+  <body>
+
+    <nav>
+      <a href="http://www.zoowebsite.com">
+        <img src="zoo logo.png" alt="Zoo Logo">
+      </a>
+      <div>
+        <button class="support-btn" onclick="window.open('https://stlzoo.org/give', '_blank')">Support</button>
+      </div>
+    </nav>
+    
+    
+    
+    <section id="header">
+      <h1 class = "heading">Critacally Endangered Animals at the STL Zoo</h1>
+      <p class = "synp">At the Saint Louis Zoo, they are committed to protecting animals and their habitats, both locally and globally. Through collaborative efforts, they are working towards preventing animal extinction and building strong and sustainable communities.</p>
+      <button class="explore-btn" onclick="document.querySelector('#map').scrollIntoView({ behavior: 'smooth' });">Explore</button>
+    </section>
+    
+    
+
+    
+    <div id="map"></div>
+    <button class="reset-btn" onclick="map.setView([0, 0], 2.4);">Reset</button>
+
+    <script>
+
+      
+      var map = L.map('map').setView([0, 0], 2.4);
+      var accessToken = 'UswBBVLwYUuihB5tnUpT';
+      var tilesUrl = 'https://api.maptiler.com/maps/outdoor/{z}/{x}/{y}.png?key=' + accessToken;
+      L.tileLayer(tilesUrl, {
+        maxZoom: 19,
+        tileSize: 512,
+        zoomOffset: -1
+      }).addTo(map);
+      
+
+      var leopardIcon = L.icon({
+        iconUrl: 'leopardicon.png',
+        iconSize: [30, 30], 
+        iconAnchor: [25, 50],
+        popupAnchor: [-9,-55]
+      });
+      var leopard = L.marker([50.10222186236447, 129.46378916574213], {icon: leopardIcon},).addTo(map);
+      leopard.bindPopup(`
+      <div class='popup-body'>
+      <h1>Amur Leopard</h1>
+      <img src= "leopard.png" id="leopard" />
+      <div class='popup-section'>
+        <h2>Population</h2>
+        <p>More than 84 individuals</p>
+      </div>
+      <div class='popup-section'>
+        <h2>Range</h2>
+        <p>Southeastern Russia</p>
+      </div>
+      <div class='popup-section'>
+        <h2>Habitat</h2>
+        <p>Mountain Forests</p>
+      </div>
+      <div>
+        <h2>Threats</h2>
+        <p>The Amur leopard is poached largely for its beautiful, spotted fur.</p>
+      </div>
+      <div>
+        <h2>Conservation Efforts</h2>
+        <p>Amur leopards are the most endangered big cat. Through cooperative conservation efforts, their population has grown. The Saint Louis Zoo participates in the Amur Leopard Species Survival Plan, a cooperative breeding program that helps ensure a healthy population of animals. Learn more about how we are helping wildlife around the world.</p>
+      </div>
+    </div> ` 
+      , {maxWidth: "400", minWidth: "300"}
+      ).on('click', function(e) {
+        var newLatLng = L.latLng(e.latlng.lat + 14, e.latlng.lng);
+        map.flyTo(newLatLng, 4);
+      });
+
+
+      var MaynaIcon = L.icon({
+        iconUrl: 'MynaIcon.png',
+        iconSize: [30, 30], 
+        iconAnchor: [25, 50],
+        popupAnchor: [-9,-55]
+      });
+      var Mayna = L.marker([-8.4095, 115.46378916574213], {icon: MaynaIcon},).addTo(map);
+      Mayna.bindPopup(`
+      <div class='popup-body'>
+      <h1>Bali Mayna</h1>
+      <img src= "bali3.jpeg" id="mayna" />
+      <div class='popup-section'>
+        <h2>Population</h2>
+        <p>Around 60 individuals</p>
+      </div>
+      <div class='popup-section'>
+        <h2>Range</h2>
+        <p>Bali (in Indonesia)</p>
+      </div>
+      <div class='popup-section'>
+        <h2>Habitat</h2>
+        <p>Open woodland with grass understorey</p>
+      </div>
+      <div>
+        <h2>Threats</h2>
+        <p>Illegal pet trade and habitat destruction</p>
+      </div>
+      <div>
+        <h2>Conservation Efforts</h2>
+        <p>The Saint Louis Zoo participates in the Species Survival Plan for Bali mynas. This is a cooperative breeding program, with a number of zoos working together to ensure the survival of the species. They also support them in the Bird House at the Zoo.</p>
+      </div>
+    </div> ` 
+      , {maxWidth: "400", minWidth: "300"}
+      ).on('click', function(e) {
+        var newLatLng = L.latLng(e.latlng.lat + 28.5, e.latlng.lng);
+        map.flyTo(newLatLng, 4);
+      });
+
+
+
+
+
+    </script>
+  </body>
+</html>
