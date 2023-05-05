@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Endangered Animals at the STL Zoo</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  </head>
+  <body>
+
+    <nav>
+      <a href="https://stlzoo.org/">
+        <img src="zoo logo.png" alt="Zoo Logo">
+      </a>
+      <div>
+        <button class="support-btn" onclick="window.open('https://stlzoo.org/give', '_blank')">Support</button>
+      </div>
+    </nav>
+    
+    
+    
+    <section id="header">
+      <h1 class = "heading">Critically Endangered Animals at the STL Zoo</h1>
+      <p class = "synp">This project was created to raise awareness about the urgent need to protect the world's most vulnerable and endangered animal species.</p>
+      <p class = "synp">‎ </p>
+      <p class = "synp">At the Saint Louis Zoo, they are committed to protecting animals and their habitats, both locally and globally. They believe that it is their responsibility to work towards preventing animal extinction and building strong, sustainable communities that coexist with wildlife. </p>
+      <p class = "synp">‎ </p>
+      <p class = "synp">Sadly, many species are facing extinction due to a variety of factors, such as habitat destruction, climate change, poaching, and pollution. We must act now to save these animals and preserve our planet's biodiversity for future generations. </p>
+      <button class="explore-btn" onclick="document.querySelector('#map').scrollIntoView({ behavior: 'smooth' });">Explore</button>
+    </section>
+    
+    
+
+    
+    <div id="map"></div>
+    <button class="reset-btn" onclick="map.setView([0, 0], 2.4); map.closePopup();">Reset</button>
+
+    
+
+    <script>
+      var map = L.map('map').setView([0, 0], 2.4);
+      var accessToken = 'UswBBVLwYUuihB5tnUpT';
+      var tilesUrl = 'https://api.maptiler.com/maps/outdoor/{z}/{x}/{y}.png?key=' + accessToken;
+      L.tileLayer(tilesUrl, {
+        maxZoom: 19,
+        tileSize: 512,
+        zoomOffset: -1
+      }).addTo(map);
+      
+
+      var leopardIcon = L.icon({
+        iconUrl: 'leapordpin.png',
+        iconSize: [40, 50], 
+        iconAnchor: [25, 50],
+        popupAnchor: [-9,-55]
+      });
+      var leopard = L.marker([50.10222186236447, 129.46378916574213], {icon: leopardIcon},).addTo(map);
+      leopard.bindPopup(`
+      <div class='popup-body'>
+
+      <img src= "LEAPORDHEADER.png" id="leopard" />
+      <div class='popup-section'>
+        <h3>Population</h3>
+        <p>More than 84 individuals</p>
+      </div>
+      <div class='popup-section'>
+        <h3>Range</h3>
+        <p>Southeastern Russia</p>
+      </div>
+      <div class='popup-section'>
+        <h3>Habitat</h3>
+        <p>Mountain forests</p>
+      </div>
+      <div>
+        <h2>Threats</h2>
+        <p>The Amur leopard is poached largely for its beautiful, spotted fur.</p>
+      </div>
+      <div>
+        <h2>Conservation Efforts</h2>
+        <p>Amur leopards are the most endangered big cat. Through cooperative conservation efforts, their population has grown. The Saint Louis Zoo participates in the Amur Leopard Species Survival Plan, a cooperative breeding program that helps ensure a healthy population of animals.</p>
+      </div>
+    </div> ` 
+      , {maxWidth: "400", minWidth: "300"}
+      ).on('click', function(e) {
+        var newLatLng = L.latLng(e.latlng.lat + 14, e.latlng.lng);
+        map.flyTo(newLatLng, 4);
+      });
+
+
+      var MaynaIcon = L.icon({
+        iconUrl: 'maynapin.png',
+        iconSize: [40, 50], 
+        iconAnchor: [25, 50],
+        popupAnchor: [-9,-55]
+      });
+      var Mayna = L.marker([-8.4095, 115.46378916574213], {icon: MaynaIcon},).addTo(map);
+      Mayna.bindPopup(`
+      <div class='popup-body'>
+      <img src= "mynapin.png" id="mayna" />
+      <div class='popup-section'>
+        <h3>Population</h3>
+        <p>Around 60 individuals</p>
+      </div>
+      <div class='popup-section'>
+        <h3>Range</h3>
+        <p>Bali (in Indonesia)</p>
+      </div>
+      <div class='popup-section'>
+        <h3>Habitat</h3>
+        <p>Open woodland with grass understorey</p>
+      </div>
+      <div>
+        <h2>Threats</h2>
+        <p>Illegal pet trade and habitat destruction</p>
+      </div>
+      <div>
+        <h2>Conservation Efforts</h2>
+        <p>The Saint Louis Zoo participates in the Species Survival Plan for Bali mynas. This is a cooperative breeding program, with a number of zoos working together to ensure the survival of the species. They also support them in the Bird House at the Zoo.</p>
+      </div>
+    </div> ` 
+      , {maxWidth: "400", minWidth: "300"}
+      ).on('click', function(e) {
+        var newLatLng = L.latLng(e.latlng.lat + 28.5, e.latlng.lng);
+        map.flyTo(newLatLng, 4);
+      });
+
+      var GorillaIcon = L.icon({
+        iconUrl: 'gorillapin.png',
+        iconSize: [40, 50], 
+        iconAnchor: [25, 50],
+        popupAnchor: [-9,-55]
+      });
+      var Gorilla = L.marker([-5.010018, 14.962715], {icon: GorillaIcon},).addTo(map);
+      Gorilla.bindPopup(`
+      <div class='popup-body'>
+      <img src= "GORILLAHEAD.png" id="gorilla" />
+      <div class='popup-section'>
+        <h3>Population</h3>
+        <p>Around  110,000 individuals</p>
+      </div>
+      <div class='popup-section'>
+        <h3>Range</h3>
+        <p>Western equatorial Africa</p>
+      </div>
+      <div class='popup-section'>
+        <h3>Habitat</h3>
+        <p>Tropical forests</p>
+      </div>
+      <div>
+        <h2>Threats</h2>
+        <p>Habitat destruction, the bushmeat trade, and the spread of disease</p>
+      </div>
+      <div>
+        <h2>Conservation Efforts</h2>
+        <p>The Saint Louis Zoo support a bachelor troop of gorillas. The Saint Louis Zoo also participates in the Species Survival Plan for western lowland gorillas. This is a cooperative breeding program, with a number of zoos working together to ensure the survival of the species. Additionally, through the Saint Louis Zoo WildCare Institute Center for the Conservation of Congo Apes, they are developing conservation policies and local leadership to ensure the long-term survival of chimpanzees and gorillas in the Congo Basin.</p>
+      </div>
+    </div> ` 
+      , {maxWidth: "400", minWidth: "300"}
+      ).on('click', function(e) {
+        var newLatLng = L.latLng(e.latlng.lat + 30.5, e.latlng.lng);
+        map.flyTo(newLatLng, 4);
+      });
+
+     
+
+      var HellbenderIcon = L.icon({
+        iconUrl: 'hellbenderpin.png',
+        iconSize: [40, 50], 
+        iconAnchor: [25, 50],
+        popupAnchor: [-9,-55]
+      });
+      var Hellbender = L.marker([36.601317, -93.614156], {icon: HellbenderIcon},).addTo(map);
+      Hellbender.bindPopup(`
+      <div class='popup-body'>
+      <img src= "hellpin.png" id="hellbender" />
+      <div class='popup-section'>
+        <h3>Population</h3>
+        <p>Around 2,000 individuals </p>
+      </div>
+      <div class='popup-section'>
+        <h3>Range</h3>
+        <p>South central Missouri, North central Arkansas</p>
+      </div>
+      <div class='popup-section'>
+        <h3>Habitat</h3>
+        <p>Cool, clear streams with moderate to fast currents</p>
+      </div>
+      <div>
+        <h2>Threats</h2>
+        <p>habitat alteration and degradation, over collecting, disease, predation, and degraded water quality.</p>
+      </div>
+      <div>
+        <h2>Conservation Efforts</h2>
+        <p>The Saint Louis Zoo is leading conservation of this species both at the Zoo and in the wild. The Saint Louis Zoo's Ron and Karen Goellner Center for Hellbender Conservation assists researchers who are studying the water quality of the hellbenders' native habitat in Missouri and Arkansas while also managing a captive breeding program for reintroduction to the wild. The Saint Louis Zoo was the first organization to successfully breed captive Ozark hellbenders in the world. We have released thousands of hellbenders into the wild, and we support these salamanders in the Herpetarium at the Zoo.</p>
+      </div>
+    </div> ` 
+      , {maxWidth: "400", minWidth: "300"}
+      ).on('click', function(e) {
+        var newLatLng = L.latLng(e.latlng.lat + 22.86, e.latlng.lng);
+        map.flyTo(newLatLng, 4);
+      });
+
+      var OrangutanIcon = L.icon({
+        iconUrl: 'oranpin.png',
+        iconSize: [40, 50], 
+        iconAnchor: [25, 50],
+        popupAnchor: [-9,-55]
+      });
+
+      var Orangutan = L.marker([-0.813452, 101.247677], {icon: OrangutanIcon},).addTo(map);
+      Orangutan.bindPopup(`
+      <div class='popup-body'>
+      <img src= "ORANGHEAD.png" id="orangutan" />
+      <div class='popup-section'>
+        <h3>Population</h3>
+        <p>Around 14,000 individuals</p>
+      </div>
+      <div class='popup-section'>
+        <h3>Range</h3>
+        <p>Sumatra</p>
+      </div>
+      <div class='popup-section'>
+        <h3>Habitat</h3>
+        <p>Tropical forests </p>
+      </div>
+      <div>
+        <h2>Threats</h2>
+        <p>Habitat loss mainly due to fire and conversion of forests to oil palm plantations and other agricultural development. </p>
+      </div>
+      <div>
+        <h2>Conservation Efforts</h2>
+        <p>The Saint Louis Zoo WildCare Institute supports HUTAN-Kinabatangan Orangutan Conservation Programme in Malaysian Borneo in an effort to help this species in the wild. The Saint Louis Zoo also participates in the Orangutan Species Survival Plan, a cooperative breeding program that helps ensure a healthy population of animals. </p>
+      </div>
+    </div> ` 
+      , {maxWidth: "400", minWidth: "300"}
+      ).on('click', function(e) {
+        var newLatLng = L.latLng(e.latlng.lat + 28.5, e.latlng.lng);
+        map.flyTo(newLatLng, 4);
+      });
+
+
+      var AssIcon = L.icon({
+        iconUrl: 'asspin.png',
+        iconSize: [40, 50], 
+        iconAnchor: [25, 50],
+        popupAnchor: [-9,-55]
+      });
+      var Ass = L.marker([3.943574, 43.794221], {icon: AssIcon},).addTo(map);
+      Ass.bindPopup(`
+      <div class='popup-body'>
+      <img src= "ASSHEAD.png" id="ass" />
+      <div class='popup-section'>
+        <h3>Population</h3>
+        <p>Around 200 individuals</p>
+      </div>
+      <div class='popup-section'>
+        <h3>Range</h3>
+        <p>Northeastern Somalia and Northern Ethiopia </p>
+      </div>
+      <div class='popup-section'>
+        <h3>Habitat</h3>
+        <p>Hilly and stony deserts; arid to semi-arid bushlands and grasslands</p>
+      </div>
+      <div>
+        <h2>Threats</h2>
+        <p>local inhabitants hunting for food and for medicinal purposes </p>
+      </div>
+      <div>
+        <h2>Conservation Efforts</h2>
+        <p>The Saint Louis Zoo WildCare Institute Center for Conservation in the Horn of Africa works with a variety of partners to save this species. The Saint Louis Zoo also participates in the Species Survival Plan for Somali wild ass, a cooperative breeding program that helps ensure a healthy population of animals.</p>
+      </div>
+    </div> ` 
+      , {maxWidth: "400", minWidth: "300"}
+      ).on('click', function(e) {
+        var newLatLng = L.latLng(e.latlng.lat + 28.5, e.latlng.lng);
+        map.flyTo(newLatLng, 4);
+      });
+
+      var LemurIcon = L.icon({
+        iconUrl: 'lemurpin.png',
+        iconSize: [40, 50], 
+        iconAnchor: [25, 50],
+        popupAnchor: [-9,-55]
+      });
+      var Lemur = L.marker([-17.968221, 46.384308], {icon: LemurIcon},).addTo(map);
+      Lemur.bindPopup(`
+      <div class='popup-body'>
+      <img src= "LEMURHEAD.png" id="lemur" />
+      <div class='popup-section'>
+        <h3>Population</h3>
+        <p>between 1000 and 10,000 individuals</p>
+      </div>
+      <div class='popup-section'>
+        <h3>Range</h3>
+        <p>Northwestern Madagascar</p>
+      </div>
+      <div class='popup-section'>
+        <h3>Habitat</h3>
+        <p>Dry forests, scrublands</p>
+      </div>
+      <div>
+        <h2>Threats</h2>
+        <p>Habitat destruction</p>
+      </div>
+      <div>
+        <h2>Conservation Efforts</h2>
+        <p>The zoo supports a troop of mongoose lemurs. The Saint Louis Zoo also participates in the Species Survival Plan for mongoose lemurs. This is a cooperative breeding program, with a number of zoos working together to ensure the survival of the species.</p>
+      </div>
+    </div> ` 
+      , {maxWidth: "400", minWidth: "300"}
+      ).on('click', function(e) {
+        var newLatLng = L.latLng(e.latlng.lat + 28.5, e.latlng.lng);
+        map.flyTo(newLatLng, 4);
+      });
+
+
+      var CamelIcon = L.icon({
+        iconUrl: 'camelpin.png',
+        iconSize: [40, 50], 
+        iconAnchor: [25, 50],
+        popupAnchor: [-9,-55]
+      });
+      var Camel = L.marker([46.106104, 103.124663], {icon: CamelIcon},).addTo(map);
+      Camel.bindPopup(`
+      <div class='popup-body'>
+      <img src= "CAMELHEAD.png" id="camel" />
+      <div class='popup-section'>
+        <h3>Population</h3>
+        <p>Around 1,000 individuals</p>
+      </div>
+      <div class='popup-section'>
+        <h3>Range</h3>
+        <p>Mongolia (in Central Asia)</p>
+      </div>
+      <div class='popup-section'>
+        <h3>Habitat</h3>
+        <p>Deserts and grasslands</p>
+      </div>
+      <div>
+        <h2>Threats</h2>
+        <p>Humans destroying their natural habitat for farming and mining</p>
+      </div>
+      <div>
+        <h2>Conservation Efforts</h2>
+        <p>Although domesticated Bactrian camels are numbered in the millions, there are less than 1,000 wild camels left in their native range in Mongolia. The Zoo supports Bactrian camels at Red Rocks.</p>
+      </div>
+    </div> ` 
+      , {maxWidth: "400", minWidth: "300"}
+      ).on('click', function(e) {
+        var newLatLng = L.latLng(e.latlng.lat + 15.8, e.latlng.lng);
+        map.flyTo(newLatLng, 4);
+      });
+
+      var AddaxIcon = L.icon({
+        iconUrl: 'addaxpin.png',
+        iconSize: [40, 50], 
+        iconAnchor: [25, 50],
+        popupAnchor: [-9,-55]
+      });
+      var Addax  = L.marker([23.861929, 23.241680], {icon: AddaxIcon},).addTo(map);
+      Addax .bindPopup(`
+      <div class='popup-body'>
+      <img src= "ADDAXHEAD.png" id="addax" />
+      <div class='popup-section'>
+        <h3>Population</h3>
+        <p>Around 100 individuals</p>
+      </div>
+      <div class='popup-section'>
+        <h3>Range</h3>
+        <p>Sahara desert</p>
+      </div>
+      <div class='popup-section'>
+        <h3>Habitat</h3>
+        <p>Sandy and stony deserts</p>
+      </div>
+      <div>
+        <h2>Threats</h2>
+        <p>Overhunting, political insecurity and disturbance within their habitat by oil exploration</p>
+      </div>
+      <div>
+        <h2>Conservation Efforts</h2>
+        <p>The Saint Louis Zoo WildCare Institute’s Saharan Wildlife Recovery Center works with a variety of partners, like the Sahara Conservation, to save the addax. Additionally, the Zoo participates in the Zoos and Aquariums Species Survival Plan for the addax. This is a cooperative breeding program, with a number of zoos working together to ensure the survival of the species.</p>
+      </div>
+    </div> ` 
+      , {maxWidth: "400", minWidth: "300"}
+      ).on('click', function(e) {
+        var newLatLng = L.latLng(e.latlng.lat + 24.5, e.latlng.lng);
+        map.flyTo(newLatLng, 4);
+      });
+
+
+      var IguanaIcon = L.icon({
+        iconUrl: 'iguanapin.png',
+        iconSize: [40, 50], 
+        iconAnchor: [25, 50],
+        popupAnchor: [-9,-55]
+      });
+      var Iguana  = L.marker([17.941984, -76.991451], {icon: IguanaIcon},).addTo(map);
+      Iguana.bindPopup(`
+      <div class='popup-body'>
+      <img src= "IGUANAHEAD.png" id="iguana" />
+      <div class='popup-section'>
+        <h3>Population</h3>
+        <p>Around 200 individuals</p>
+      </div>
+      <div class='popup-section'>
+        <h3>Range</h3>
+        <p>Jamaica, Hellshire Hills region</p>
+      </div>
+      <div class='popup-section'>
+        <h3>Habitat</h3>
+        <p>Tropical dry forest on rugged limestone outcroppings</p>
+      </div>
+      <div>
+        <h2>Threats</h2>
+        <p>deforestation and threats from non-native animals—including mongooses, cats, dogs and pigs</p>
+      </div>
+      <div>
+        <h2>Conservation Efforts</h2>
+        <p>The Saint Louis Zoo participates in the Association of Zoos and Aquariums' Species Survival Program for Jamaican iguanas.</p>
+      </div>
+    </div> ` 
+      , {maxWidth: "400", minWidth: "300"}
+      ).on('click', function(e) {
+        var newLatLng = L.latLng(e.latlng.lat + 23.5, e.latlng.lng);
+        map.flyTo(newLatLng, 4);
+      });
+
+      var AlligatorIcon = L.icon({
+        iconUrl: 'alligatorpin.png',
+        iconSize: [40, 50], 
+        iconAnchor: [25, 50],
+        popupAnchor: [-9,-55]
+      });
+      var Alligator  = L.marker([29.695834, 112.644353], {icon: AlligatorIcon},).addTo(map);
+      Alligator.bindPopup(`
+      <div class='popup-body'>
+      <img src= "ALLIGATORHEAD.PNG" id="alligator" />
+      <div class='popup-section'>
+        <h3>Population</h3>
+        <p>Around 150 individuals</p>
+      </div>
+      <div class='popup-section'>
+        <h3>Range</h3>
+        <p>Eastern China (confined to a small area in the Yangtze River Basin </p>
+      </div>
+      <div class='popup-section'>
+        <h3>Habitat</h3>
+        <p>Rivers, streams, lakes, ponds, swamps, but now mostly found in ditches and ponds on agricultural land</p>
+      </div>
+      <div>
+        <h2>Threats</h2>
+        <p>Habitat destruction</p>
+      </div>
+      <div>
+        <h2>Conservation Efforts</h2>
+        <p>The species has been successfully bred in wildlife refuges and in zoos, which maintain healthy populations. In 2003, the first captive-born Chinese alligators were released into their native range.
+
+The Saint Louis Zoo supports Chinese alligators in the Charles H. Hoessle Herpetarium at the Zoo. </p>
+      </div>
+    </div> ` 
+      , {maxWidth: "400", minWidth: "300"}
+      ).on('click', function(e) {
+        var newLatLng = L.latLng(e.latlng.lat + 24.5, e.latlng.lng);
+        map.flyTo(newLatLng, 4);
+      });
+
+    </script>
+  </body>
+</html>
